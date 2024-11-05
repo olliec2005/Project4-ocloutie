@@ -16,20 +16,26 @@ inline int leftChild(const int& i) {
 template <typename Comparable>
 void percolateDown(vector<Comparable> &items, int& i, unsigned long& n, int& child, Comparable& tmp, unsigned long& reads) {
     for(tmp = items[i]; leftChild(i) < n; i = child) {
+        reads++;
         child = leftChild(i);
         // choose the child with the larger value
         if (child != n - 1) {
             if (items[child] < items[child + 1]) {
                 ++child;
             }
+
+            reads += 2;
         }
         // if the parent is less than the child, swap them
         if (tmp < items[child]) {
             items[i] = items[child];
+            reads++;
         } else {
             // parent is >= both children. nothing more to do.
             break;
         }
+
+        reads++;
     }
     items[i] = tmp;
 }
@@ -38,8 +44,11 @@ template <typename Comparable>
 vector<Comparable> heapSort(vector<Comparable> items, unsigned long& reads, unsigned long& allocations) {
     reads = allocations = 0;
     int i, child;
+    allocations += 2 * sizeof(int);
     Comparable temp, tmp;
+    allocations += 2 * sizeof(Comparable);
     unsigned long j, n;
+    allocations += 2 * sizeof(unsigned long);
     // build the heap (with max value at root)
     for (i = items.size() / 2 - 1; i >= 0; --i) {
         n = items.size();
@@ -55,6 +64,8 @@ vector<Comparable> heapSort(vector<Comparable> items, unsigned long& reads, unsi
         temp = items[0];
         items[0] = items[j];
         items[j] = temp;
+
+        reads += 2;
 
         // make it into a heap again
         i = 0;

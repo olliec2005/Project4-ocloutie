@@ -6,9 +6,13 @@
 template<typename Comparable>
 vector<Comparable> bubbleSort(vector<Comparable> vec, unsigned long& reads, unsigned long& allocations) {
     reads = allocations = 0;
+    allocations += 2 * sizeof(int);
     int numPasses = 0, i;
+    allocations += 2 * sizeof(int);
     Comparable temp;
+    allocations += sizeof(Comparable);
     bool haveSwapped = true;
+    allocations += sizeof(bool);
     while (haveSwapped) {
         haveSwapped = false;
         for (i = 0; i+1 < vec.size()-numPasses; ++i) {
@@ -19,7 +23,11 @@ vector<Comparable> bubbleSort(vector<Comparable> vec, unsigned long& reads, unsi
                 vec[i+1] = temp;
                 // Update haveSwapped
                 haveSwapped = true;
+
+                reads += 2;
             }
+
+            reads += 2;
         }
         // Update numPasses
         ++numPasses;

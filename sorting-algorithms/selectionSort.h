@@ -7,7 +7,9 @@ template<typename Comparable>
 vector<Comparable> selectionSort(vector<Comparable> vec, unsigned long& reads, unsigned long& allocations) {
     reads = allocations = 0;
     int swapIndex, i, minIndex;
+    allocations += 5 * sizeof(int);
     Comparable temp;
+    allocations += sizeof(Comparable);
     for (swapIndex = 0; swapIndex < vec.size()-1; ++swapIndex) {
         // Loop through vector starting at swapIndex and keep track of min
         minIndex = swapIndex;
@@ -16,6 +18,8 @@ vector<Comparable> selectionSort(vector<Comparable> vec, unsigned long& reads, u
                 // We have a new minimum
                 minIndex = i;
             }
+
+            reads += 2;
         }
         // Swap min value into swapIndex spot in vector
         if (minIndex != swapIndex) {
@@ -23,6 +27,8 @@ vector<Comparable> selectionSort(vector<Comparable> vec, unsigned long& reads, u
             vec[swapIndex] = vec[minIndex];
             vec[minIndex] = temp;
         }
+
+        reads += 2;
 
         // Uncomment this line if you want to see each iteration
         //printVec(vec);

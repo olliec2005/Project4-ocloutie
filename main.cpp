@@ -7,13 +7,28 @@
 #include "sorting-algorithms/selectionSort.h"
 #include "stability-test/contactsList.h"
 #include <iomanip>
+#include "Pizza.h"
+#include<vector>
 using namespace std;
 
 void stabilityTest();
 
 int main() {
-    // TODO: Get your vector of custom data type objects ready
+    //vector of custom data type objects
+    vector<Pizza> pizzas;
+    if(loadData(pizzas)) {
+        cout<<"Pizza data loaded"<<endl;
+    }
+
     // TODO: loop through vector sizes from 1000 to 100 in decrements of 100
+    int reads;
+    int allocations;
+
+    for(int i = 1000; i > 0; i -= 100) {
+        //bubble sort
+        vector<Pizza> shorter_pizzas = pizzas.resize(10);
+        bubbleSort(pizzas, reads, allocations);
+    }
     // TODO: sort the vector in four different ways (bubble, ?, heap, ?)
     // TODO: record the number of reads and allocations for each sort
 
