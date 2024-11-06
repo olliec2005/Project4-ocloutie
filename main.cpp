@@ -20,16 +20,35 @@ int main() {
         cout<<"Pizza data loaded"<<endl;
     }
 
-    // TODO: loop through vector sizes from 1000 to 100 in decrements of 100
-    int reads;
-    int allocations;
+    //loop through vector sizes from 1000 to 100 in decrements of 100
+    unsigned long reads;
+    unsigned long allocations;
 
     for(int i = 1000; i > 0; i -= 100) {
+        // TODO: sort the vector in four different ways (bubble, ?, heap, ?)
+
+        pizzas.resize(i);
+
         //bubble sort
-        vector<Pizza> shorter_pizzas = pizzas.resize(10);
         bubbleSort(pizzas, reads, allocations);
+        cout<<"Bubble Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
+            "Size = "<<i<<endl;
+
+        //heap sort
+        heapSort(pizzas, reads, allocations);
+        cout<<"Heap Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
+            "Size = "<<i<<endl;
+
+        //merge sort
+        mergeSort(pizzas, reads, allocations);
+        cout<<"Merge Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
+            "Size = "<<i<<endl;
+
+        //selection sort
+        selectionSort(pizzas, reads, allocations);
+        cout<<"Selection Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
+            "Size = "<<i<<endl;
     }
-    // TODO: sort the vector in four different ways (bubble, ?, heap, ?)
     // TODO: record the number of reads and allocations for each sort
 
     stabilityTest();

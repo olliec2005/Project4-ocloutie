@@ -35,6 +35,8 @@ public:
         this -> category = category;
     };
 
+    Pizza(int pizza_id, int order_id, int quantity)
+
     //getters for class attributes
     int get_pizza_id()
     {
