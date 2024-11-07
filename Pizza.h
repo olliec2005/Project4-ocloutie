@@ -35,7 +35,18 @@ public:
         this -> category = category;
     };
 
-    Pizza(int pizza_id, int order_id, int quantity)
+    Pizza() {
+        this -> pizza_id = 0;
+        this -> order_id = 0;
+        this -> quantity = 0;
+        this -> unit_price = 0;
+        this -> total_price = 0;
+        this -> pizza_name = "name";
+        this -> order_date = "date";
+        this -> order_time = "time";
+        this -> size = "size";
+        this -> category = "category";
+    };
 
     //getters for class attributes
     int get_pizza_id()
@@ -136,30 +147,27 @@ public:
 
     bool operator>(const Pizza& p2) const
     {
-        if (this -> pizza_id > p2.pizza_id) {
-            return true;
-        }
-        return this -> pizza_id > p2.pizza_id;
+        return this -> total_price > p2.total_price;
     }
 
     bool operator<(const Pizza& p2) const
     {
-        return this -> pizza_id < p2.pizza_id;
+        return this -> total_price < p2.total_price;
     }
 
     bool operator>=(const Pizza& p2) const
     {
-        return this -> pizza_id >= p2.pizza_id;
+        return this -> total_price >= p2.total_price;
     }
 
     bool operator<=(const Pizza& p2) const
     {
-        return this -> pizza_id <= p2.pizza_id;
+        return this -> total_price <= p2.total_price;
     }
 
     bool operator==(const Pizza& p2) const
     {
-        return this -> pizza_id == p2.pizza_id;
+        return this -> total_price == p2.total_price;
     }
 };
 

@@ -24,32 +24,40 @@ int main() {
     unsigned long reads;
     unsigned long allocations;
 
-    for(int i = 1000; i > 0; i -= 100) {
-        // TODO: sort the vector in four different ways (bubble, ?, heap, ?)
+    ofstream bubble_out;
+    ofstream heap_out;
+    ofstream selection_out;
+    ofstream merge_out;
 
+    bubble_out.open("../data/bubble.csv");
+    heap_out.open("../data/heap.csv");
+    selection_out.open("../data/select.csv");
+    merge_out.open("../data/merge.csv");
+
+    bubble_out<<"Size, Reads, Allocations"<<endl;
+    heap_out<<"Size, Reads, Allocations"<<endl;
+    selection_out<<"Size, Reads, Allocations"<<endl;
+    merge_out<<"Size, Reads, Allocations"<<endl;
+
+    for(int i = 1000; i > 0; i -= 100) {
         pizzas.resize(i);
 
         //bubble sort
         bubbleSort(pizzas, reads, allocations);
-        cout<<"Bubble Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
-            "Size = "<<i<<endl;
+        bubble_out<<i<<", "<<reads<<", "<<allocations<<endl;
 
         //heap sort
         heapSort(pizzas, reads, allocations);
-        cout<<"Heap Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
-            "Size = "<<i<<endl;
+        heap_out<<i<<", "<<reads<<", "<<allocations<<endl;
 
         //merge sort
         mergeSort(pizzas, reads, allocations);
-        cout<<"Merge Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
-            "Size = "<<i<<endl;
+        merge_out<<i<<", "<<reads<<", "<<allocations<<endl;
 
         //selection sort
         selectionSort(pizzas, reads, allocations);
-        cout<<"Selection Sort: Reads = "<<reads<<" Allocations = "<<allocations<<
-            "Size = "<<i<<endl;
+        selection_out<<i<<", "<<reads<<", "<<allocations<<endl;
     }
-    // TODO: record the number of reads and allocations for each sort
 
     stabilityTest();
     return 0;
@@ -64,10 +72,12 @@ void stabilityTest() {
     cout << endl << "Bubble Sort" << endl;
     people.sortAndPrint(bubbleSort<contact>);
 
-    // TODO: add other stable algorithm here
+    cout << endl << "Merge Sort" << endl;
+    people.sortAndPrint(mergeSort<contact>);
 
     cout << endl << "Heap Sort" << endl;
     people.sortAndPrint(heapSort<contact>);
 
-    // TODO: add other unstable algorithm here
+    cout << endl << "Selection Sort" << endl;
+    people.sortAndPrint(selectionSort<contact>);
 }
